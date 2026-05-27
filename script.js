@@ -3,6 +3,15 @@ const sections = document.querySelectorAll('.page-section');
 const mode = document.querySelector('.mode');
 const logo = document.querySelector('.logo');
 const afficher = document.querySelector('.afficherTheme');
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.querySelector('lightbox-close');
+const cartes = document.querySelectorAll('.pic');
+
+
+
+
 console.log("Test");
 console.log(bouttons.length);
 console.log(afficher);
@@ -23,6 +32,31 @@ mode.addEventListener("click", function(){
     }
 });
 
+//cartes zoom
+cartes.forEach (carte =>{
+    carte.addEventListener('click',()=>{
+        const img = carte.querySelector('img');
+        if(img && lightboxImg && lightbox){
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.classList.add('no-scroll');
+        }
+    });
+});
+
+if(lightboxClose){
+    lightboxClose.addEventListener('click', ()=>{
+        lightbox.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    });
+}
+
+lightbox.addEventListener('click', (clic) => {
+    if(clic.target !== lightboxImg && clic.target !== lightboxClose){
+        lightbox.classList.remove('active')
+        document.body.classList.remove('no-scroll');
+    }
+});
 
 
 //sections

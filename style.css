@@ -6,15 +6,19 @@
 }
 
 :root {
-    --bg-principal: #f0e68c;
+    --bg-principal: #e9e9eb;
     --texte-principal: #1a1a1a;
-    --extremes: #e2725b;
+    --texte-secondaires: #5f5f5f;
+    --accent: #410fb6;
+    --extremes: #f8f8f8;
 }
 
 [theme="dark"]{
-    --bg-principal: #121212;
+    --bg-principal: #22201d;
     --texte-principal: #f4f4f9;
-    --extremes: grey;
+    --texte-secondaires: #5f5f5f;
+    --accent: #e0001a;
+    --extremes: #1b1815;
 }
 
 
@@ -57,6 +61,7 @@ body{
 
 .contenu{
     flex: 1;
+    padding-top: 130px;
 }
 
 p{
@@ -69,6 +74,10 @@ h1{
 }
 
 header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     background-color: var(--extremes);
     color: var(--texte-principal); 
     width: 100%;
@@ -114,13 +123,14 @@ footer{
 
 .button:hover{
     background-color: rgba(0,123,255 , 0.1);
-    color: #007bff;
+    color: var(--accent);
     transform: translateY(-2px);
 }
 
 #mode:hover{
     transform: translateY(-2px) scale(1.03);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    color: var(--accent);
 }
 
 .button:active, #mode:active{
@@ -139,14 +149,19 @@ footer{
     width: 100%;
     justify-content: center;
 }
-.p1, .p2, .p3, .p4, .p5, .p6, .p7{
+.pic{
   display:flex;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  background-color: aqua;
+  background-color: var(--accent);
   padding: 10px;
   border-radius: 8px;
+  max-width: 320px;
+}
+
+.pic:hover{
+    transform: translateY(-2px) scale(1.03);
 }
 
 .pubg img{
@@ -159,5 +174,80 @@ footer{
 .pubg p{
     margin-top: 10px;
     font-weight: bold;
-    color: var(--texte-principal);
+    color: whitesmoke;
+}
+
+/*lightbox*/
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+.lightbox img{
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.lightbox.active{
+    display: flex;
+}
+
+.lightbox.active img{
+    transform: scale(1);
+}
+
+.lightbox-close{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s
+}
+
+.lightbox-close:hover{
+    color: #007bff;
+}
+
+body.no-scroll{
+    overflow: hidden;
+}
+
+
+
+/*phone*/
+@media (max-width: 768px){
+    .navbar{
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 2%;
+        text-align: center;
+    }
+    .navbutton{
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .button{
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    .contenu{
+        padding-top: 170px;
+    }
 }
